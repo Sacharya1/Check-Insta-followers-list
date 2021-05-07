@@ -28,24 +28,27 @@ def insta_unfollowed_check(following,followers):
         id=i.split("'s")
         followers_list.append(id[0])
     
-    unfollow_list=[]    
+    unfollow_list=[]   
+    print("\nPeople you follow but they don't follow back: \n")
     for i in following_list:
       if i not in followers_list:
         print(i)
         unfollow_list.append(i)
     following.close()
-    followers.close()    
-    print("\nTotal Runtime: %s mili-seconds" % (float(time.time() - start_time)*1000))    
+    followers.close() 
+    print("\nTotal number of people: "+ str(len(unfollow_list))+"\n")
+    print("Total Runtime: %s mili-seconds" % (float(time.time() - start_time)*1000))    
     following_list.sort()
     followers_list.sort()
     following.close()
-    followers.close()    
+    followers.close()   
+    return unfollow_list
             
 def main():
     global start_time
     start_time = time.time()
-    following=open('following.txt')
-    followers=open('followers.txt')
+    following=open('following.txt', encoding="utf8")
+    followers=open('followers.txt',encoding="utf8")
     insta_unfollowed_check(following,followers)
     del start_time
 
